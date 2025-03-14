@@ -28,13 +28,13 @@ export async function POST(request: Request) {
       from: `"Contact Form" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER, // If EMAIL_TO is not set, send to the same email
       replyTo: email, // Set reply-to as the sender's email
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `Запрос на выступление от ${name}`,
       text: `
-        Name: ${name}
+        Имя: ${name}
         Email: ${email}
-        Event Type: ${eventType || 'Not specified'}
+        Тип выступления: ${eventType || 'Не указано'}
         
-        Message:
+        Сообщение:
         ${message}
       `,
       html: `

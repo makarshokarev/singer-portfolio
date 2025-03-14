@@ -5,9 +5,11 @@ import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ThemeToggle() {
+  const [mounted, setMounted] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     // Check if user has a theme preference in localStorage
     const savedTheme = localStorage.getItem("theme")
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -31,6 +33,18 @@ export function ThemeToggle() {
       localStorage.setItem("theme", "dark")
       setIsDarkMode(true)
     }
+  }
+
+  if (!mounted) {
+    return (
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label="Loading theme toggle"
+      >
+        <Moon className="h-5 w-5" />
+      </Button>
+    )
   }
 
   return (

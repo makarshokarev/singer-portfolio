@@ -3,6 +3,7 @@ import "@/app/globals.css"
 import { Montserrat } from "next/font/google"
 import type { Metadata } from "next"
 import { LanguageProvider } from "./contexts/language-context"
+import { LenisProvider } from "@/components/LenisProvider"
 import Script from "next/script"
 
 const montserrat = Montserrat({
@@ -73,15 +74,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="et">
+    <html lang="et" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://jekaterina-margalnikova.com" />
         <link rel="alternate" hrefLang="et" href="https://jekaterina-margalnikova.com/" />
         <link rel="alternate" hrefLang="ru" href="https://jekaterina-margalnikova.com/ru" />
         <link rel="alternate" hrefLang="x-default" href="https://jekaterina-margalnikova.com/" />
       </head>
-      <body className={montserrat.className}>
-        <LanguageProvider>{children}</LanguageProvider>
+      <body className={montserrat.className} suppressHydrationWarning>
+        <LenisProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </LenisProvider>
         <Script id="schema-org" type="application/ld+json">
           {`
             {
